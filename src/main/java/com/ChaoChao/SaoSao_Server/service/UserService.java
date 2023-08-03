@@ -7,6 +7,7 @@ import com.ChaoChao.SaoSao_Server.entity.User;
 import com.ChaoChao.SaoSao_Server.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -21,10 +22,15 @@ public class UserService {
     private final UserRepository userRepository;
 
 
-    public void createUser(SignUpRequest request){
-        request.setUserPassword(bCryptPasswordEncoder.encode(request.getUserPassword()));
-        User createdUser =  new User().createUser(request);
-        userRepository.save(createdUser);
+    public ResponseEntity createUser(SignUpRequest request) {
+        if (userRepository.findByUserName(request.getUserName()).isPresent()) {
+            return ResponseEntity.badRequest().body("already existed username");
+        } else {
+            request.setUserPassword(bCryptPasswordEncoder.encode(request.getUserPassword()));
+            User createdUser = new User().createUser(request);
+            userRepository.save(createdUser);
+            return ResponseEntity.ok().build();
+        }
     }
 
 
