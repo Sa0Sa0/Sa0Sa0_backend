@@ -51,6 +51,7 @@ public class UserController {
 
         return "사용자이름 : "+ principal.getUser().getUserName()+
                 "\n사용자ID(pk값) : "+principal.getUser().getUserId();
+
     }
 
     // 매니저 혹은 어드민이 접근 가능
