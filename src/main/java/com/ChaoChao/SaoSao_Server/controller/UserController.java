@@ -7,6 +7,7 @@ import com.ChaoChao.SaoSao_Server.security.config.auth.PrincipalDetails;
 import com.ChaoChao.SaoSao_Server.service.UserService;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +24,8 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/signup")
-    public void signUp (@RequestBody SignUpRequest request){
-        userService.createUser(request);
+    public ResponseEntity signUp (@RequestBody SignUpRequest request){
+        return userService.createUser(request);
     }
 
 //    @PostMapping("/join")
