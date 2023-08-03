@@ -6,7 +6,8 @@ import com.ChaoChao.SaoSao_Server.repository.UserRepository;
 import com.ChaoChao.SaoSao_Server.security.config.auth.PrincipalDetails;
 import com.ChaoChao.SaoSao_Server.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,15 +41,15 @@ public class UserController {
         return "<h1>home</h1>";
     }
 
-//    @GetMapping("/api/user")
-//    public String user(Authentication authentication) {
-//        PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
-//        System.out.println("principal : " + principal.getUser().getId());
-//        System.out.println("principal : " + principal.getUser().getUsername());
-//        System.out.println("principal : " + principal.getUser().getPassword());
-//
-//        return "<h1>user</h1>";
-//    }
+    @GetMapping("/api/user")
+    public String user(Authentication authentication) {
+        PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
+        System.out.println("principal : " + principal.getUser().getUserId());
+        System.out.println("principal : " + principal.getUser().getUserName());
+        System.out.println("principal : " + principal.getUser().getUserPassword());
+
+        return principal.getUser().getUserName();
+    }
 
     // 매니저 혹은 어드민이 접근 가능
     @GetMapping("/api/manager/reports")
