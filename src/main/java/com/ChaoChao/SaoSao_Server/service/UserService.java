@@ -1,12 +1,9 @@
 package com.ChaoChao.SaoSao_Server.service;
 
 import com.ChaoChao.SaoSao_Server.dto.SignUpRequest;
-
-
 import com.ChaoChao.SaoSao_Server.entity.User;
 import com.ChaoChao.SaoSao_Server.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,8 +13,6 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-
-
 
     private final UserRepository userRepository;
 
