@@ -57,6 +57,7 @@ public class User extends BaseEntity{
 
     @Builder
     public User(Integer userId, String userName, String userEmail, String userPassword, String userLocation, Integer userPoint, List<PurchaseLog> purchaseLogs, String roles) {
+
         this.userId = userId;
         this.userName = userName;
         this.userEmail = userEmail;
@@ -65,9 +66,8 @@ public class User extends BaseEntity{
         this.userPoint = userPoint;
         this.purchaseLogs = purchaseLogs;
         this.roles = roles;
+
     }
-
-
 
 
 
