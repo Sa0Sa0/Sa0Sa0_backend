@@ -18,8 +18,9 @@ public class UserService {
 
 
     public ResponseEntity createUser(SignUpRequest request) {
-        if (userRepository.findByUserName(request.getUserName()).isPresent()) {
-            return ResponseEntity.badRequest().body("already existed username");
+        if (userRepository.findByUserName(request.getUserName()).isPresent()
+            || userRepository.findByUserName(request.getUserEmail()).isPresent()) {
+            return ResponseEntity.badRequest().body("Already existed userName or userEmail");
         } else {
             request.setUserPassword(bCryptPasswordEncoder.encode(request.getUserPassword()));
             User createdUser = new User().createUser(request);
